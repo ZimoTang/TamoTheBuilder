@@ -1,30 +1,33 @@
-.image{
-  display: block;
-  width:100%;
-  
+.image {
+    background: bisque;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
 }
 
-.aboutme{
-  width: 200px;
+.aboutme {
+    width: 200px;
+    background: bisque;
 }
 .rectangle {
-  width: 40%; 
-  height: 2000px;
-  background-color: rgb(230, 230, 50); 
-  border: 2px solid rgb(22, 22, 5);
-  margin-left: 30%;
-  top: 30%;
+    width: 40%;
+    height: 2000px;
+    background-color: rgb(230, 230, 50);
+    border: 2px solid rgb(22, 22, 5);
+    margin-left: 30%;
+    top: 30%;
   position: absolute;
   z-index: 1;
-} 
+}
 .text {
-  position: absolute; 
-  top: 40%;
-  left: 50%; 
-  transform: translate(-50%, -50%); 
-  color: rgb(0, 0, 0); 
-  font-size: 18px; 
-  width: 80%;
-  text-align: center; 
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+    width: 80%;
+    text-align: center;
   z-index: 2;
 }
