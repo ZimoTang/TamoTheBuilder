@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platformer Game</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+            background-color: #87CEEB;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Player object
+        const player = {
+            x: 50,
+            y: canvas.height - 70,
+            width: 50,
+            height: 50,
+            speed: 5,
+            jumpPower: 40,
+            jumping: false,
+            jumpCount: 0,
+            gravity: 3,
+            jumpLimit: 2,
+            grounded: true,
+            draw() {
+                ctx.fillStyle = 'red';
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+            },
+            jump() {
+                if (this.jumpCount < this.jumpLimit) {
+                    this.jumping = true;
+                    this.grounded = false;
+                    this.jumpCount++;
+                    this.y -= this.jumpPower * 2;
+                }
+            },
+            moveLeft() {
+                this.x -= this.speed;
+            },
+            moveRight() {
+                this.x += this.speed;
+            },
+            applyGravity() {
+                if (!this.grounded) {
+                    this.y += this.gravity;
+                }
+            },
+            update() {
+                if (this.jumping) {
+                    this.applyGravity();
+                    if (this.y >= canvas.height - this.height) {
+                        this.jumping = false;
+                        this.jumpCount = 0;
+                        this.y = canvas.height - this.height;
+                        this.grounded = true;
+                    }
+                }
+            }
+        };
+
+        // Input handling
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowUp') {
+                player.jump();
+            }
+            if (e.key === 'ArrowLeft') {
+                player.moveLeft();
+            }
+            if (e.key === 'ArrowRight') {
+                player.moveRight();
+            }
+        });
+
+        // Game loop
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            player.update();
+            player.draw();
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        gameLoop();
+    </script>
+</body>
+</html>
